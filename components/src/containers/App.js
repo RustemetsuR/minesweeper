@@ -3,6 +3,7 @@ import './App.css';
 
 const App = () => {
   const [cubes, setCubes] = useState([]);
+  let [tries, setTries] = useState(0);
 
   const pushToArr = (cubesCopy) => {
     for (let i = 0; i < 36; i++) {
@@ -37,6 +38,20 @@ const App = () => {
       console.log(cubesCopy[random])
       setCubes(cubesCopy);
     }
+  }
+
+  const find = id => {
+    tries++;
+    setTries(tries);
+    const index = cubes.findIndex(c => c.id === id);
+    const cubesCopy = [...cubes];
+    const cube = { ...cubesCopy[index] };
+    console.log(cube)
+    if (cube.status === true) {
+      alert('NICE!');
+      reset();
+    }
+    setCubes(cubesCopy);
   }
   return (
     <div className="App">
