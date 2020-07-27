@@ -12,20 +12,35 @@ const App = () => {
       })
     }
     setCubes(cubesCopy);
-  } 
-  
-const makeArr = () =>{
-  const cubesCopy = [...cubes];
-  if(cubesCopy.length === 36){
-    cubesCopy.length = 0;
-    pushToArr(cubesCopy);
-  }else{
-    pushToArr(cubesCopy);
   }
-}
+
+  const makeArr = () => {
+    const cubesCopy = [...cubes];
+    if (cubesCopy.length === 36) {
+      cubesCopy.length = 0;
+      pushToArr(cubesCopy);
+    } else {
+      pushToArr(cubesCopy);
+    }
+  }
+
+  const reset = () => {
+    if (cubes.length !== 0) {
+      tries = 0;
+      setTries(tries);
+      const random = Math.floor(Math.random() * 36);
+      const cubesCopy = [...cubes];
+      for (let i = 0; i < cubesCopy.length; i++) {
+        cubesCopy[i].status = false;
+      }
+      cubesCopy[random].status = true;
+      console.log(cubesCopy[random])
+      setCubes(cubesCopy);
+    }
+  }
   return (
     <div className="App">
-     
+
     </div>
   );
 }
