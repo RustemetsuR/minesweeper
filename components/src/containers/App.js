@@ -1,5 +1,8 @@
 import React from 'react';
 import './App.css';
+import Cube from '../components/Cube/Cube';
+import Tries from '../components/Tries/Tries';
+import Reset from '../components/Reset/Reset'
 
 const App = () => {
   const [cubes, setCubes] = useState([]);
@@ -53,9 +56,21 @@ const App = () => {
     }
     setCubes(cubesCopy);
   }
+
+  let cubesField = cubes.map(oneCube => {
+    return (
+      <Cube find={() => find(oneCube.id)} key={oneCube.id}/>
+    )
+  })
+
   return (
     <div className="App">
-
+ <button style={marginButton} onClick={makeArr}>Create cubes</button>
+      <Tries tries={tries}/>
+      <Reset reset={reset}/>
+      <div className="cube-field">
+        {cubesField}
+      </div>
     </div>
   );
 }
