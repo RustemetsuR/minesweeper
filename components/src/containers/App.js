@@ -1,33 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Cube from '../components/Cube/Cube';
+import Reset from '../components/Reset/Reset';
 import Tries from '../components/Tries/Tries';
-import Reset from '../components/Reset/Reset'
+
 
 const App = () => {
   const [cubes, setCubes] = useState([]);
   let [tries, setTries] = useState(0);
 
   const pushToArr = (cubesCopy) => {
-    for (let i = 0; i < 36; i++) {
-      cubesCopy.push({
-        id: 'id-' + i,
-        status: false,
-      })
-    }
-    setCubes(cubesCopy);
-  }
-
-  const makeArr = () => {
+      for (let i = 0; i < 36; i++) {
+        cubesCopy.push({
+          id: 'id-' + i,
+          status: false,
+        })
+      }
+      setCubes(cubesCopy);
+    } 
+  const makeArr = () =>{
     const cubesCopy = [...cubes];
-    if (cubesCopy.length === 36) {
+    if(cubesCopy.length === 36){
       cubesCopy.length = 0;
       pushToArr(cubesCopy);
-    } else {
+    }else{
       pushToArr(cubesCopy);
     }
   }
-
   const reset = () => {
     if (cubes.length !== 0) {
       tries = 0;
@@ -42,7 +41,7 @@ const App = () => {
       setCubes(cubesCopy);
     }
   }
-
+  
   const find = id => {
     tries++;
     setTries(tries);
@@ -56,16 +55,18 @@ const App = () => {
     }
     setCubes(cubesCopy);
   }
-
+  
   let cubesField = cubes.map(oneCube => {
     return (
       <Cube find={() => find(oneCube.id)} key={oneCube.id}/>
     )
   })
+  
+  const marginButton = {marginTop: '25px'}
 
   return (
     <div className="App">
- <button style={marginButton} onClick={makeArr}>Create cubes</button>
+      <button style={marginButton} onClick={makeArr}>Create cubes</button>
       <Tries tries={tries}/>
       <Reset reset={reset}/>
       <div className="cube-field">
